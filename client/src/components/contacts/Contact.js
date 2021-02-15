@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import ContactItem from '../../components/contacts/ContactItem';
 
+import { motion, AnimatePresence } from 'framer-motion';
+
 // Context
 import ContactContext from '../../context/contact/contactContext';
 
@@ -15,13 +17,35 @@ const Contact = () => {
 
 	return (
 		<>
-			{filtered !== null
-				? filtered.map(contact => (
-						<ContactItem key={contact.id} contact={contact} />
-				  ))
-				: contacts.map(contact => (
-						<ContactItem key={contact.id} contact={contact} />
-				  ))}
+			{filtered !== null ? (
+				<AnimatePresence>
+					{filtered.map(contact => (
+						<motion.div
+							key={contact.id}
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ delay: 0.2 }}
+						>
+							<ContactItem contact={contact} />
+						</motion.div>
+					))}
+				</AnimatePresence>
+			) : (
+				<AnimatePresence>
+					{contacts.map(contact => (
+						<motion.div
+							key={contact.id}
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ delay: 0.2 }}
+						>
+							<ContactItem contact={contact} />
+						</motion.div>
+					))}
+				</AnimatePresence>
+			)}
 		</>
 	);
 };
