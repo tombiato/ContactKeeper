@@ -12,15 +12,23 @@ import {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state, action) => {
 	switch (action.type) {
-		case REGISTER_SUCCESS:
-			localStorage.setItem('token', action.payload);
+		case USER_LOGGED:
 			return {
 				...state,
-				...action.payload,
+				isAuthenticated: true,
+				loading: false,
+				user: action.payload,
+			};
+		case REGISTER_SUCCESS:
+			console.log(localStorage.getItem('token'));
+			return {
+				...state,
+				token: action.payload,
 				isAuthenticated: true,
 				loading: false,
 			};
 		case REGISTER_FAIL:
+		case AUTH_ERROR:
 			localStorage.removeItem('token');
 			return {
 				...state,
