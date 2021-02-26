@@ -24,7 +24,6 @@ router.get('/', auth, async (req, res) => {
 
 		res.json(contacts);
 	} catch (err) {
-		console.error(err.message);
 		res.status(500).json({ msg: 'Server Error' });
 	}
 });
