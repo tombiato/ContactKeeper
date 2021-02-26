@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import ContactContext from '../../context/contact/contactContext';
-import { useContext } from 'react/cjs/react.development';
 
 const ContactItem = ({ contact }) => {
 	const contactContext = useContext(ContactContext);
